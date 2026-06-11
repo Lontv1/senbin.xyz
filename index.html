@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Клуб карате Sen-Bin</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/tabler-icons.min.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{--orange:#FF6B00;--black:#111;--white:#fff;--gray:#f5f5f5;--text-muted:#888;--color-background-primary:#1a1a1a;--color-background-secondary:#222;--color-text-primary:#fff;--color-text-secondary:#aaa;--color-border-tertiary:#333;--border-radius-md:6px;--border-radius-lg:8px}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:#0a0a0a;color:#fff}
+    .nav{background:#111;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-radius:var(--border-radius-lg) var(--border-radius-lg) 0 0}
+    .logo{color:#FF6B00;font-size:20px;font-weight:500;letter-spacing:1px}
+    .logo span{color:#fff}
+    .nav-links{display:flex;gap:4px}
+    .nav-links button{background:transparent;border:none;color:#aaa;font-size:13px;padding:6px 10px;cursor:pointer;border-radius:6px;transition:all .2s}
+    .nav-links button.active,.nav-links button:hover{color:#FF6B00;background:rgba(255,107,0,.1)}
+    .lang-toggle{display:flex;gap:4px}
+    .lang-toggle button{background:transparent;border:0.5px solid #444;color:#aaa;font-size:12px;padding:4px 8px;cursor:pointer;border-radius:4px}
+    .lang-toggle button.active{border-color:#FF6B00;color:#FF6B00}
+    .hero{background:#111;padding:48px 24px;text-align:center;border-bottom:2px solid #FF6B00}
+    .hero h1{color:#fff;font-size:36px;font-weight:500;margin-bottom:8px}
+    .hero h1 span{color:#FF6B00}
+    .hero p{color:#aaa;font-size:15px;margin-bottom:24px}
+    .hero-btns{display:flex;gap:12px;justify-content:center}
+    .btn-primary{background:#FF6B00;color:#fff;border:none;padding:10px 24px;border-radius:var(--border-radius-md);cursor:pointer;font-size:14px;font-weight:500}
+    .btn-secondary{background:transparent;color:#FF6B00;border:1px solid #FF6B00;padding:10px 24px;border-radius:var(--border-radius-md);cursor:pointer;font-size:14px}
+    .section{padding:32px 24px;display:none}
+    .section.active{display:block}
+    .section-title{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid #FF6B00;display:inline-block}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:16px}
+    .card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px}
+    .card-icon{width:40px;height:40px;background:rgba(255,107,0,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+    .card-icon i{font-size:20px;color:#FF6B00}
+    .card h3{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+    .card p{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
+    .school-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px;margin-bottom:12px}
+    .school-card h3{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+    .school-card p{font-size:13px;color:var(--color-text-secondary)}
+    .school-card .badge{display:inline-block;background:rgba(255,107,0,.1);color:#FF6B00;font-size:11px;padding:2px 8px;border-radius:4px;margin-top:6px}
+    .trainer-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px;display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+    .trainer-avatar{width:44px;height:44px;border-radius:50%;background:rgba(255,107,0,.15);display:flex;align-items:center;justify-content:center;color:#FF6B00;font-size:14px;font-weight:500;flex-shrink:0}
+    .schedule-row{display:grid;grid-template-columns:80px 1fr 1fr;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+    .schedule-row:last-child{border-bottom:none}
+    .day-badge{background:#111;color:#FF6B00;font-size:11px;padding:2px 6px;border-radius:4px;text-align:center}
+    .event-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-left:3px solid #FF6B00;border-radius:var(--border-radius-md);padding:14px 16px;margin-bottom:12px}
+    .event-card .date{font-size:12px;color:#FF6B00;margin-bottom:4px}
+    .event-card h3{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+    .event-card p{font-size:13px;color:var(--color-text-secondary)}
+    .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+    .product-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+    .product-img{height:120px;background:#111;display:flex;align-items:center;justify-content:center}
+    .product-img i{font-size:40px;color:#FF6B00}
+    .product-info{padding:12px}
+    .product-info h3{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+    .product-info .price{font-size:16px;font-weight:500;color:#FF6B00;margin-bottom:8px}
+    .product-info button{width:100%;background:#FF6B00;color:#fff;border:none;padding:7px;border-radius:6px;cursor:pointer;font-size:13px}
+    .map-container{background:#111;border-radius:var(--border-radius-lg);height:200px;display:flex;align-items:center;justify-content:center;margin-top:16px;border:0.5px solid var(--color-border-tertiary)}
+    .map-container p{color:#aaa;font-size:13px;text-align:center}
+    .map-container i{font-size:32px;color:#FF6B00;display:block;margin-bottom:8px}
+    .add-btn{background:transparent;border:1px dashed #FF6B00;color:#FF6B00;padding:10px 20px;border-radius:var(--border-radius-md);cursor:pointer;font-size:13px;width:100%;margin-top:12px}
+    .add-btn:hover{background:rgba(255,107,0,.05)}
+    .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
+    .modal-bg.open{display:flex}
+    .modal{background:var(--color-background-primary);border-radius:var(--border-radius-lg);padding:24px;width:320px;max-width:90vw}
+    .modal h3{font-size:16px;font-weight:500;margin-bottom:16px;color:var(--color-text-primary)}
+    .modal input,.modal select{width:100%;margin-bottom:10px;padding:8px 10px;border-radius:6px;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);color:var(--color-text-primary);font-size:13px}
+    .modal-btns{display:flex;gap:8px;margin-top:4px}
+    .modal-btns button{flex:1;padding:8px;border-radius:6px;cursor:pointer;font-size:13px}
+    .modal-btns .confirm{background:#FF6B00;color:#fff;border:none}
+    .modal-btns .cancel{background:transparent;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)}
+    .cart-badge{background:#FF6B00;color:#fff;font-size:10px;border-radius:50%;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;margin-left:4px;vertical-align:middle}
+    .hero-section{display:block}
+  </style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">SEN-<span>BIN</span></div>
+  <div class="nav-links">
+    <button class="active" onclick="showTab('home')" id="tab-home">Головна</button>
+    <button onclick="showTab('schools')" id="tab-schools">Школи</button>
+    <button onclick="showTab('trainers')" id="tab-trainers">Тренери</button>
+    <button onclick="showTab('events')" id="tab-events">Події</button>
+    <button onclick="showTab('shop')" id="tab-shop">Магазин <span class="cart-badge" id="cart-count">0</span></button>
+    <button onclick="showTab('contacts')" id="tab-contacts">Контакти</button>
+  </div>
+  <div class="lang-toggle">
+    <button class="active" id="lang-ua" onclick="setLang('ua')">UA</button>
+    <button id="lang-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<div id="home" class="section active" style="padding:0">
+  <div class="hero">
+    <h1>Клуб карате <span>Sen-Bin</span></h1>
+    <p id="hero-sub">Бойові мистецтва. Дисципліна. Carattere.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showTab('schools')">Наші школи</button>
+      <button class="btn-secondary" onclick="showTab('events')">Найближчі події</button>
+    </div>
+  </div>
+  <div style="padding:24px">
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon"><i class="ti ti-building" aria-hidden="true"></i></div><h3 id="c1t">Школи клубу</h3><p id="c1p">Кілька локацій по місту — знайди зручну для тебе</p></div>
+      <div class="card"><div class="card-icon"><i class="ti ti-users" aria-hidden="true"></i></div><h3 id="c2t">Досвідчені тренери</h3><p id="c2p">Майстри з багаторічним досвідом у карате</p></div>
+      <div class="card"><div class="card-icon"><i class="ti ti-trophy" aria-hidden="true"></i></div><h3 id="c3t">Змагання</h3><p id="c3p">Регулярні турніри та спортивні події клубу</p></div>
+      <div class="card"><div class="card-icon"><i class="ti ti-shirt" aria-hidden="true"></i></div><h3 id="c4t">Магазин</h3><p id="c4p">Все необхідне для тренувань з карате</p></div>
+    </div>
+  </div>
+</div>
+
+<div id="schools" class="section">
+  <div class="section-title" id="schools-title">Школи клубу</div>
+  <div id="schools-list">
+    <div class="school-card"><h3>Школа №1 — Центр</h3><p>вул. Хрещатик 10, Київ</p><p style="font-size:13px;color:var(--color-text-secondary);margin-top:4px">Пн, Ср, Пт — 16:00–19:00</p><span class="badge">Активна</span></div>
+    <div class="school-card"><h3>Школа №2 — Лівий берег</h3><p>вул. Дарницька 5, Київ</p><p style="font-size:13px;color:var(--color-text-secondary);margin-top:4px">Вт, Чт, Сб — 15:00–18:00</p><span class="badge">Активна</span></div>
+  </div>
+  <button class="add-btn" onclick="openModal('school')"><i class="ti ti-plus" aria-hidden="true"></i> Додати школу</button>
+</div>
+
+<div id="trainers" class="section">
+  <div class="section-title" id="trainers-title">Тренери</div>
+  <div id="trainers-list">
+    <div class="trainer-card">
+      <div class="trainer-avatar">ОК</div>
+      <div style="flex:1">
+        <div style="font-size:15px;font-weight:500;color:var(--color-text-primary)">Олексій Коваленко</div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Головний тренер · 3 дан</div>
+        <div class="schedule-row" style="font-size:12px;font-weight:500;color:var(--color-text-secondary)"><span>День</span><span>Школа</span><span>Час</span></div>
+        <div class="schedule-row"><span class="day-badge">Пн/Ср/Пт</span><span style="color:var(--color-text-primary);font-size:13px">Центр</span><span style="color:var(--color-text-secondary);font-size:13px">16:00–18:30</span></div>
+      </div>
+    </div>
+    <div class="trainer-card">
+      <div class="trainer-avatar">МС</div>
+      <div style="flex:1">
+        <div style="font-size:15px;font-weight:500;color:var(--color-text-primary)">Марія Савченко</div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Тренер · 2 дан</div>
+        <div class="schedule-row" style="font-size:12px;font-weight:500;color:var(--color-text-secondary)"><span>День</span><span>Школа</span><span>Час</span></div>
+        <div class="schedule-row"><span class="day-badge">Вт/Чт/Сб</span><span style="color:var(--color-text-primary);font-size:13px">Лівий берег</span><span style="color:var(--color-text-secondary);font-size:13px">15:00–17:30</span></div>
+      </div>
+    </div>
+  </div>
+  <button class="add-btn" onclick="openModal('trainer')"><i class="ti ti-plus" aria-hidden="true"></i> Додати тренера</button>
+</div>
+
+<div id="events" class="section">
+  <div class="section-title" id="events-title">События клубу</div>
+  <div id="events-list">
+    <div class="event-card"><div class="date">15 липня 2025</div><h3>Відкритий чемпіонат Sen-Bin</h3><p>Змагання серед учнів усіх шкіл клубу. Категорії: юніори, дорослі.</p></div>
+    <div class="event-card"><div class="date">3 серпня 2025</div><h3>Літній табір карате</h3><p>Виїзний тренувальний табір. Реєстрація відкрита.</p></div>
+    <div class="event-card"><div class="date">20 вересня 2025</div><h3>Екзамен на пояс</h3><p>Атестація учнів на підвищення кваліфікаційного ступеня.</p></div>
+  </div>
+  <button class="add-btn" onclick="openModal('event')"><i class="ti ti-plus" aria-hidden="true"></i> Додати подію</button>
+</div>
+
+<div id="shop" class="section">
+  <div class="section-title" id="shop-title">Магазин</div>
+  <div class="product-grid" id="products-list">
+    <div class="product-card"><div class="product-img"><i class="ti ti-outfit" aria-hidden="true"></i></div><div class="product-info"><h3>Кімоно Sen-Bin</h3><div class="price">850 грн</div><button onclick="addToCart(this)">До кошика</button></div></div>
+    <div class="product-card"><div class="product-img"><i class="ti ti-shield" aria-hidden="true"></i></div><div class="product-info"><h3>Захист рук</h3><div class="price">320 грн</div><button onclick="addToCart(this)">До кошика</button></div></div>
+    <div class="product-card"><div class="product-img"><i class="ti ti-circle" aria-hidden="true"></i></div><div class="product-info"><h3>Пояс чорний</h3><div class="price">150 грн</div><button onclick="addToCart(this)">До кошика</button></div></div>
+    <div class="product-card"><div class="product-img"><i class="ti ti-boxing-glove" aria-hidden="true"></i></div><div class="product-info"><h3>Рукавички</h3><div class="price">480 грн</div><button onclick="addToCart(this)">До кошика</button></div></div>
+  </div>
+  <button class="add-btn" onclick="openModal('product')" style="margin-top:16px"><i class="ti ti-plus" aria-hidden="true"></i> Додати товар</button>
+</div>
+
+<div id="contacts" class="section">
+  <div class="section-title" id="contacts-title">Контакти</div>
+  <div class="cards-grid" style="margin-bottom:16px">
+    <div class="card"><div class="card-icon"><i class="ti ti-phone" aria-hidden="true"></i></div><h3>Телефон</h3><p>+38 (050) 000-00-00</p></div>
+    <div class="card"><div class="card-icon"><i class="ti ti-mail" aria-hidden="true"></i></div><h3>Email</h3><p>info@sen-bin.com.ua</p></div>
+    <div class="card"><div class="card-icon"><i class="ti ti-brand-instagram" aria-hidden="true"></i></div><h3>Instagram</h3><p>@senbin_karate</p></div>
+  </div>
+  <div class="map-container" onclick="openMap()">
+    <div style="text-align:center">
+      <i class="ti ti-map-pin" aria-hidden="true"></i>
+      <p style="color:#FF6B00;font-size:14px;font-weight:500">Відкрити на Google Maps</p>
+      <p style="color:#666;font-size:12px;margin-top:4px">Натисни щоб переглянути локації шкіл</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">Додати</h3>
+    <div id="modal-content"></div>
+    <div class="modal-btns">
+      <button class="confirm" onclick="saveModal()">Зберегти</button>
+      <button class="cancel" onclick="closeModal()">Скасувати</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let lang='ua',cart=0,modalType='';
+const t={
+  ua:{home:'Головна',schools:'Школи',trainers:'Тренери',events:'Події',shop:'Магазин',contacts:'Контакти',heroSub:'Бойові мистецтва. Дисципліна. Характер.',addSchool:'Додати школу',addTrainer:'Додати тренера',addEvent:'Додати подію',addProduct:'Додати товар',save:'Зберегти',cancel:'Скасувати'},
+  en:{home:'Home',schools:'Schools',trainers:'Trainers',events:'Events',shop:'Shop',contacts:'Contacts',heroSub:'Martial arts. Discipline. Character.',addSchool:'Add school',addTrainer:'Add trainer',addEvent:'Add event',addProduct:'Add product',save:'Save',cancel:'Cancel'}
+};
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+function setLang(l){
+  lang=l;
+  document.getElementById('lang-ua').classList.toggle('active',l==='ua');
+  document.getElementById('lang-en').classList.toggle('active',l==='en');
+  document.getElementById('hero-sub').textContent=t[l].heroSub;
+  const tabs=['home','schools','trainers','events','shop','contacts'];
+  tabs.forEach(tab=>{
+    const btn=document.getElementById('tab-'+tab);
+    if(btn) btn.childNodes[0].textContent=t[l][tab]+(tab==='shop'?' ':' ');
+  });
+}
+function addToCart(btn){
+  cart++;
+  document.getElementById('cart-count').textContent=cart;
+  btn.textContent='✓ Додано';
+  btn.style.background='#333';
+  setTimeout(()=>{btn.textContent='До кошика';btn.style.background='#FF6B00'},1500);
+}
+function openMap(){
+  window.open('https://maps.google.com/?q=Київ+карате','_blank');
+}
+const modalForms={
+  school:`<input placeholder="Назва школи" id="f1"/><input placeholder="Адреса" id="f2"/><input placeholder="Розклад (напр. Пн, Ср, Пт 16:00-19:00)" id="f3"/>`,
+  trainer:`<input placeholder="Ім'я та прізвище" id="f1"/><input placeholder="Звання / Дан" id="f2"/><input placeholder="Школа" id="f3"/><input placeholder="Розклад" id="f4"/>`,
+  event:`<input placeholder="Назва події" id="f1"/><input placeholder="Дата" id="f2" type="date"/><input placeholder="Опис" id="f3"/>`,
+  product:`<input placeholder="Назва товару" id="f1"/><input placeholder="Ціна (грн)" id="f2" type="number"/>`
+};
+const modalTitles={school:'Додати школу',trainer:'Додати тренера',event:'Додати подію',product:'Додати товар'};
+function openModal(type){
+  modalType=type;
+  document.getElementById('modal-title').textContent=modalTitles[type];
+  document.getElementById('modal-content').innerHTML=modalForms[type];
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function saveModal(){
+  const f1=document.getElementById('f1')?.value;
+  if(!f1){closeModal();return;}
+  if(modalType==='school'){
+    const f2=document.getElementById('f2')?.value||'';
+    const f3=document.getElementById('f3')?.value||'';
+    const d=document.createElement('div');d.className='school-card';
+    d.innerHTML=`<h3>${f1}</h3><p>${f2}</p><p style="font-size:13px;color:var(--color-text-secondary);margin-top:4px">${f3}</p><span class="badge">Активна</span>`;
+    document.getElementById('schools-list').appendChild(d);
+  } else if(modalType==='trainer'){
+    const f2=document.getElementById('f2')?.value||'';
+    const f3=document.getElementById('f3')?.value||'';
+    const f4=document.getElementById('f4')?.value||'';
+    const ini=f1.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    const d=document.createElement('div');d.className='trainer-card';
+    d.innerHTML=`<div class="trainer-avatar">${ini}</div><div style="flex:1"><div style="font-size:15px;font-weight:500;color:var(--color-text-primary)">${f1}</div><div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">${f2}</div><div class="schedule-row"><span class="day-badge">${f4}</span><span style="color:var(--color-text-primary);font-size:13px">${f3}</span></div></div>`;
+    document.getElementById('trainers-list').appendChild(d);
+  } else if(modalType==='event'){
+    const f2=document.getElementById('f2')?.value||'';
+    const f3=document.getElementById('f3')?.value||'';
+    const d=document.createElement('div');d.className='event-card';
+    d.innerHTML=`<div class="date">${f2}</div><h3>${f1}</h3><p>${f3}</p>`;
+    document.getElementById('events-list').appendChild(d);
+  } else if(modalType==='product'){
+    const f2=document.getElementById('f2')?.value||'0';
+    const d=document.createElement('div');d.className='product-card';
+    d.innerHTML=`<div class="product-img"><i class="ti ti-package" aria-hidden="true"></i></div><div class="product-info"><h3>${f1}</h3><div class="price">${f2} грн</div><button onclick="addToCart(this)">До кошика</button></div>`;
+    document.getElementById('products-list').appendChild(d);
+  }
+  closeModal();
+}
+</script>
+
+</body>
+</html>
