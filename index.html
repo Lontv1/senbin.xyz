@@ -196,6 +196,7 @@ function showTab(id){
   document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.getElementById('tab-'+id).classList.add('active');
+  localStorage.setItem('activeTab', id);
 }
 function setLang(l){
   lang=l;
@@ -263,6 +264,12 @@ function saveModal(){
   }
   closeModal();
 }
+window.addEventListener('load', function(){
+  const savedTab = localStorage.getItem('activeTab');
+  if(savedTab){
+    showTab(savedTab);
+  }
+});
 </script>
 
 </body>
